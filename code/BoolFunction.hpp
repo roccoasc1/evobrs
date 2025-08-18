@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <bitset>
 #include <functional>
-#include "Parameters.hpp"
+#include "../Parameters.hpp"
 
 class BoolFunction {
 private:

@@ -9,7 +9,6 @@
 #include <random>
 #include <algorithm>
 #include "BoolReaction.hpp"
-#include "BoolFunction.hpp"
 
 class BRS {
 private:

@@ -18,11 +18,13 @@ int main(int argc, char * argv[]){
     
     auto start_time = std::chrono::steady_clock::now();
 
-    if(argc<2){
-        std::cout << "Enter the seed for the run (e.g. the number of the run)"<< std::endl;
-        return 0;
-    }
-    static unsigned int run = std::stoul(argv[1]);
+    unsigned int run{1234}; 
+    if(argc>1){
+        std::cout << "Input seed: "<< std::stoul(argv[1]) <<std::endl;
+        run = std::stoul(argv[1]);
+    } else {
+        std::cout << "Default seed: "<< run <<std::endl;
+    }    
     
     RNG.seed(run);
 
