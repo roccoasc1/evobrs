@@ -8,6 +8,26 @@
 
 #include <cassert>
 
+template<class T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& set) {
+    os << "{";
+    auto start = 1;
+    for (size_t i = 0; i < set.size(); ++i) {
+        if (set[i]) {
+            if (start){
+                os << "x_"<<i;
+                start=0;
+            }
+            else {
+                os << ",x_"<<i;
+            }
+        }
+    }
+    os << "}";
+  return os;
+}
+
+
 // ===== BoolReaction =====
 
 BoolReaction::BoolReaction() 
@@ -40,7 +60,6 @@ BoolReaction::BoolReaction(std::bitset<n> support) {
 };
 
 BoolReaction::BoolReaction(const std::size_t size) {
-    //std::cout << "[BoolReaction::SizeCtor] size=" << size << " entities=" << entities << std::endl;
     if (size < 1) {
         throw std::invalid_argument("Size must be at least 1.");
     }
@@ -48,7 +67,6 @@ BoolReaction::BoolReaction(const std::size_t size) {
         throw std::invalid_argument("The number of entities must be greater  or equal than the size.");
     }
     std::array<bool,n> newsupport{};
-    //std::cout << size << entities << std::endl;
 
     // Set the first k entries to true (1)
     for (int i = 0; i < size; ++i) {
@@ -57,7 +75,6 @@ BoolReaction::BoolReaction(const std::size_t size) {
 
     // Shuffle the vector randomly
     std::shuffle(newsupport.begin(), newsupport.end(), RNG);
-    // vedere se questo for si può sustituire con BoolReaction(support) convertendo new support in a bitset
     for (int i = 0; i < n; i++) {
         if (newsupport[i]){
             if (rand_bool(RNG)){
@@ -69,7 +86,6 @@ BoolReaction::BoolReaction(const std::size_t size) {
             
         }
     }
-    //assert(std::count (newsupport.begin(), newsupport.end(), true)==size);
 };
 
 int BoolReaction::getsize() const { 
@@ -112,15 +128,10 @@ bool BoolReaction::operator<=(const BoolReaction& other) const {
 }
 
 bool BoolReaction::operator<(const BoolReaction& other) const {
-    //std::cout << "entities=" << entities << ", other.entities=" << other.entities << std::endl;
     if (entities != other.entities){
         std::cerr << "Comparison error: entities=" << this->entities << ", other.entities=" << other.entities << std::endl;
         return false;
-        //std::cout << "self " << (*this);
-        //std::cout << "other " << other;
         throw this;
-        
-        
     }
     if (getsize() > other.getsize()){ return false;}
     if (getsize() < other.getsize()){ return true;}
@@ -141,6 +152,37 @@ bool BoolReaction::operator!=(const BoolReaction& other) const{
     return !operator==(other);
 }
 
+bool BoolReaction::le(const BoolReaction& other) const{
+    if (entities != other.entities){
+        std::cout << "self" << (*this);
+        std::cout << "other" << other;
+        std::cerr << "Comparison error: entities=" << entities << ", other.entities=" << other.entities << std::endl;
+        throw std::invalid_argument("Cannot le-compare reactions with different entities.");
+    }
+    for(int i=0; i<entities; i++){
+        if (R[i] && !other.R[i]){ 
+            return false;
+        }
+        if (I[i] && !other.I[i]){ 
+            return false;
+        }
+    }
+    return true;
+}
+
+bool BoolReaction::supportless(const BoolReaction& other) const{
+    if (entities != other.entities){
+        std::cout << "self" << (*this);
+        std::cout << "other" << other;
+        std::cerr << "Comparison error: entities=" << entities << ", other.entities=" << other.entities << std::endl;
+        throw std::invalid_argument("Cannot le-compare reactions with different entities.");
+    }
+
+    unsigned int support_int = getsupport().to_ulong();
+    unsigned int othersupport_int = other.getsupport().to_ulong();
+    if (support_int < othersupport_int){ return true; }
+    return false;
+}
 
 std::ostream& operator<<(std::ostream& os, const BoolReaction& r)
 {   
@@ -176,36 +218,4 @@ std::ostream& operator<<(std::ostream& os, const BoolReaction& r)
     }
     os << "}, {True})";
     return os;
-}
-
-bool BoolReaction::le(const BoolReaction& other) const{
-    if (entities != other.entities){
-        std::cout << "self" << (*this);
-        std::cout << "other" << other;
-        std::cerr << "Comparison error: entities=" << entities << ", other.entities=" << other.entities << std::endl;
-        throw std::invalid_argument("Cannot le-compare reactions with different entities.");
-    }
-    for(int i=0; i<entities; i++){
-        if (R[i] && !other.R[i]){ 
-            return false;
-        }
-        if (I[i] && !other.I[i]){ 
-            return false;
-        }
-    }
-    return true;
-}
-
-bool BoolReaction::supportless(const BoolReaction& other) const{
-    if (entities != other.entities){
-        std::cout << "self" << (*this);
-        std::cout << "other" << other;
-        std::cerr << "Comparison error: entities=" << entities << ", other.entities=" << other.entities << std::endl;
-        throw std::invalid_argument("Cannot le-compare reactions with different entities.");
-    }
-
-    unsigned int support_int = getsupport().to_ulong();
-    unsigned int othersupport_int = other.getsupport().to_ulong();
-    if (support_int < othersupport_int){ return true; }
-    return false;
 }

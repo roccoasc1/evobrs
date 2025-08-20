@@ -20,7 +20,7 @@ Evolutionary Boolean Reaction Systems is a new algorithm paradigm to construct b
   Main source file to run the EvoRS algorithm.  
 
 - **`BAL.sh`** and **`BENT.sh`** 
-  Bash files to automatically build and run the EvoRS algorithm for the `BAL` and `BENT` problems.  
+Bash files to automatically build and run the EvoRS algorithm for the `BAL` and `BENT` problems.  
 
 ## Requirements
 
@@ -50,4 +50,3 @@ and execute the program with:
 ```
 
 where `INPUT_SEED` is an integer used to initialise the random number generator.
-

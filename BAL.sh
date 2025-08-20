@@ -63,6 +63,5 @@ done
 
 echo "Launched  $NUM_RUNS runs for $PARAM_TAG"
 
-
 wait
 echo "All runs completed."

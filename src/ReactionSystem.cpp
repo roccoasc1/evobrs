@@ -119,7 +119,6 @@ void BRS::addReactions(const std::vector<BoolReaction>& rs) {
     reactions.insert(reactions.end(), rs.begin(), rs.end());
 }
 
-// New (move version) — for efficiency
 void BRS::addReactions(std::vector<BoolReaction>&& rs) {
     for (const auto& r : rs) {
         assert(r.getentities() == entities && "Trying to add a reaction with mismatched entities!");
@@ -155,7 +154,7 @@ void BRS::minimize() {
         }
     }
 
-    std::vector<int> toRemove; // ci salviamo gli indici delle reazioni da rimuovere
+    std::vector<int> toRemove; // save the indicies of the reactions to remove
     toRemove.reserve(n_reacts);
 
     for (size_t i = 0; i < n_reacts; ++i) {

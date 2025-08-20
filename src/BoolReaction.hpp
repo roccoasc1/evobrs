@@ -15,8 +15,6 @@
 class BoolReaction {
 private:
     std::bitset<n> R,I;
-    //std::vector<bool> support; //solo funzione
-    //std::size_t size; // solo funzione
     std::size_t entities{n};
 public:
     BoolReaction();
@@ -44,34 +42,12 @@ public:
     bool operator!=(const BoolReaction& other) const;
     bool operator<=(const BoolReaction& other) const;
     bool operator<(const BoolReaction& other) const;
-    
 
     bool le(const BoolReaction& other) const;
-    //bool less(const BoolReaction& other) const;
 
     bool supportless(const BoolReaction& other) const;
 
-    //friend bool operator<(const BoolReaction& r1,const BoolReaction& r2);
     friend std::ostream& operator<<(std::ostream& os, const BoolReaction& r);    
 };
-
-template<class T>
-std::ostream& operator<<(std::ostream& os, const std::vector<T>& set) {
-    os << "{";
-    auto start = 1;
-    for (size_t i = 0; i < set.size(); ++i) {
-        if (set[i]) {
-            if (start){
-                os << "x_"<<i;
-                start=0;
-            }
-            else {
-                os << ",x_"<<i;
-            }
-        }
-    }
-    os << "}";
-  return os;
-}
 
 #endif

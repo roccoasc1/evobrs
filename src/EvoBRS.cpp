@@ -11,11 +11,9 @@ double calculateMean(std::array<T,POPSIZE>& arr)
 {
     double sum = 0.0;
     int size = arr.size();
-    // Calculate the sum of elements in the vector
     for (int i = 0; i < size; ++i) {
         sum += arr[i];
     }
-    // return the mean
     return (double)sum / size;
 }
 
@@ -29,8 +27,6 @@ double calculateStandardDeviation(std::array<T,POPSIZE>& arr, double mean)
     for (int i = 0; i < size; ++i) {
         standardDeviation += pow(arr[i] - mean, 2);
     }
-    // Calculate the square root of the variance to get the
-    // standard deviation
     return sqrt(standardDeviation / size);
 }
 
@@ -44,9 +40,8 @@ EvoBRS::EvoBRS(std::function<double(const BRS&)> _fit)
     for (int i = 0; i < POPSIZE; ++i) {
         pop.emplace_back(rand_n_reactions(RNG),fit_func);
         pop[i].update_fitness();
-        //fitness(pop[i]);
     }
-    // order the population
+    
     ordering();
     n_unique_elements = static_cast<int>(pop.size());
     bestRS = pop[0];
@@ -147,7 +142,6 @@ void EvoBRS::mutationInsertRemove() {
                 std::size_t size = reactions[rm].getsize();
                 if (size == MIN_ENTITIES){
                     auto oldsupport = reactions[rm].getsupport();
-                    //new_reactions.push_back(BoolReaction(oldsupport)); // con questo funzionava bene: avevamo 114!
                     new_reactions.emplace_back(oldsupport);
                 } else{
                     new_reactions.emplace_back(size);
@@ -166,7 +160,7 @@ void EvoBRS::crossoverPopulation() {
     std::vector<BRS> offspring;
 
     std::vector<int> indices(pop.size());
-    std::iota(indices.begin(), indices.end(), 0); // Fill with 0, 1, ..., n-1 // added this line only on 19.06.2025!!!
+    std::iota(indices.begin(), indices.end(), 0); // Fill with 0, 1, ..., n-1
     std::shuffle(indices.begin(), indices.end(), RNG);
 
     for (int i = 1; i < POPSIZE; ++i) {

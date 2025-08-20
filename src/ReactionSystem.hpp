@@ -52,14 +52,12 @@ public:
     void minimize();
     
 
-    //std::unordered_map<int, int> sizesOfReactions() const;
     bool res(const std::bitset<n>& T) const;
     BoolFunction boolf() const;
 
-    bool operator==(const BRS& other) const; //cannot be const because I need to order the reactions
+    bool operator==(const BRS& other) const;
     bool operator!=(const BRS& other) const {return !(operator==(other)); }
     
-    //bool operator<=(const BRS& other) const;
     bool operator<(const BRS& other) const;
 
     friend std::ostream& operator<<(std::ostream& os, const BRS& rs);  
