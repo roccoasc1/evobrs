@@ -16,7 +16,7 @@ Evolutionary Boolean Reaction Systems is a new algorithm paradigm to construct b
 - **`Parameters.hpp`**  
   Header file to set parameters before building the code.  
 
-- **`main_EvoRS.cpp`**  
+- **`main_EvoBRS.cpp`**  
   Main source file to run the EvoRS algorithm.  
 
 - **`BAL.sh`** and **`BENT.sh`** 
@@ -40,7 +40,7 @@ Running either `.sh` script will:
 If you prefer to compile the code manually, follow these steps from the project’s base directory:
 
 ```bash
-g++ -std=c++17 -O3 -o EvoBRS.exe ./src/*.cpp ./main_EvoBRS.cpp
+g++ -std=c++17 -O3 -o EvoBRS.x ./src/*.cpp ./main_EvoBRS.cpp
 ```
 
 and execute the program with:
