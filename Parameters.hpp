@@ -13,7 +13,7 @@ constexpr unsigned int MAXFITEVALS = 100000;
 
 constexpr std::size_t n = 6;
 constexpr std::size_t n_pow = 1<<n;
-constexpr unsigned int MIN_ENTITIES = (n + 1)/ 2;//ceil of n/2
+constexpr unsigned int MIN_ENTITIES = (n + 1)/ 2; //ceil of n/2
 
 //=== CONFIGURABLE PARAMETERS BEGIN ===
 constexpr unsigned int INITSIZEMIN=80;

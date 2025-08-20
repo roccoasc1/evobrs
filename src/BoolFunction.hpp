@@ -11,7 +11,6 @@
 class BoolFunction {
 private:
     static constexpr int n_input{n};
-    //const std::vector<bool> truth_table;
     const std::bitset<n_pow> truth_table;
 public:
     BoolFunction(const std::bitset<n_pow>& truth_table);

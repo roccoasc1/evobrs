@@ -1,15 +1,15 @@
-#include "./code/EvoBRS.hpp"
+#include "./src/EvoBRS.hpp"
 #include <iostream>
 #include <chrono>
 
 static unsigned int fit_evals = 0;
 
-double testFitnessBAL(const BRS& rs) {
+double FitnessBAL(const BRS& rs) {
     fit_evals ++;
     return rs.boolf().fit_BAL_max_values(); 
 }
 
-double testFitnessBENT(const BRS& rs) {
+double FitnessBENT(const BRS& rs) {
     fit_evals ++;
     return rs.boolf().fit_BENT_max_values(); 
 }
@@ -30,7 +30,7 @@ int main(int argc, char * argv[]){
 
     std::cout << "gen,bestfit,medianfit,uniqueRS,n_reactions_median,n_reactions_mean,n_reactions_std\n";
 
-    const std::function<double(const BRS&)> fit = testFitnessBAL;
+    const std::function<double(const BRS&)> fit = FitnessBAL;
     
     EvoBRS evo(fit);
 
