@@ -1,4 +1,4 @@
-#include "./src/EvoBRS.hpp"
+#include "EvoBRS.hpp"
 #include <iostream>
 #include <chrono>
 

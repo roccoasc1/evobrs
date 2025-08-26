@@ -7,21 +7,23 @@
 #include <random>
 #include <memory>
 
+//=== CONFIGURABLE PARAMETERS BEGIN ===
 constexpr std::size_t POPSIZE = 100;
 constexpr int POPELITESIZE = 5;
 constexpr unsigned int MAXFITEVALS = 100000;
 
 constexpr std::size_t n = 6;
-constexpr std::size_t n_pow = 1<<n;
-constexpr unsigned int MIN_ENTITIES = (n + 1)/ 2; //ceil of n/2
 
-//=== CONFIGURABLE PARAMETERS BEGIN ===
-constexpr unsigned int INITSIZEMIN=80;
-constexpr unsigned int INITSIZEMAX=100;
-//=== CONFIGURABLE PARAMETERS END ===
 constexpr double PC = 0.2;
 constexpr double PRMIN = 0.8;
 constexpr double PREN = 0.1;
+
+constexpr unsigned int INITSIZEMIN=80;
+constexpr unsigned int INITSIZEMAX=100;
+//=== CONFIGURABLE PARAMETERS END ===
+
+constexpr std::size_t n_pow = 1<<n;
+constexpr unsigned int MIN_ENTITIES = (n + 1)/ 2; //ceil of n/2
 
 inline std::mt19937 RNG;
 static std::uniform_real_distribution<double> rand_01(0.0, 1.0);

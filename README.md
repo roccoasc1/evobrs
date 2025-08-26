@@ -10,17 +10,13 @@ Evolutionary Boolean Reaction Systems is a new algorithm paradigm to construct b
   - `EvoBRS`: implements the EvoBRS algorithm;
   - `BoolFunction`: represents Boolean functions as truth tables, providing methods to compute the Fast Walsh–Hadamard Transform (FWHT), Hamming weight, non linearity and unbalancedness;
 
-- **`results/`**  
-  Stores experiments conducted.  
+- **`results/`** folder where the experiments conducted are stored.  
 
-- **`Parameters.hpp`**  
-  Header file to set parameters before building the code.  
+- **`scripts/`** folder for auxiliary scripts. 
 
-- **`main_EvoBRS.cpp`**  
-  Main source file to run the EvoRS algorithm.  
+- **`Parameters.env`** file to set parameters before building the code.    
 
-- **`BAL.sh`** and **`BENT.sh`** 
-Bash files to automatically build and run the EvoRS algorithm for the `BAL` and `BENT` problems.  
+- **`run.sh`** bash file to automatically build and run the EvoRS algorithm for the `BAL` or the `BENT` problem.  
 
 ## Requirements
 
@@ -28,25 +24,13 @@ C++17-compatible compiler (e.g. `g++` 7.0+ or `clang++` 6.0+).
 
 ## Build & Run
 
-You can configure the algorithm parameters for the two problems in the files `BAL.sh` and `BENT.sh`.  
+Configure the algorithm parameters in the file `Parameters.env`:
+- `PROBLEM_NAME` must be set to `"BAL"` or `"BENT"`;
+- `N` is size of the problem to solve;
+- `INITSIZEMIN`,`INITSIZEMAX` are the minimun and maximum number of reactions in a random Boolean Reaction System;
+- `MAXFITEVALS` is the number of fitness evaluation for each run.
 
-Running either `.sh` script will:  
+Running `run.sh` script will:  
 1. Build an executable saved in the `./bin/` folder.  
 2. Run the executable `NUM_RUNS` times.  
 3. Save the results in a newly created folder inside `results/`.  
-
-### Manual Compilation
-
-If you prefer to compile the code manually, follow these steps from the project’s base directory:
-
-```bash
-g++ -std=c++17 -O3 -o EvoBRS.x ./src/*.cpp ./main_EvoBRS.cpp
-```
-
-and execute the program with:
-
-```bash
-./EvoBRS.exe INPUT_SEED
-```
-
-where `INPUT_SEED` is an integer used to initialise the random number generator.
